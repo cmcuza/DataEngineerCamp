@@ -20,10 +20,12 @@ Select t.tip_amount, t.tpep_pickup_datetime from yellow_taxi_data t
 #### 3. What was the most popular destination for passengers picked up in central park on January 14? Enter the zone name (not id). If the zone name is unknown (missing), write "Unknown"
 
 ```sql
-Select t.tip_amount, t.tpep_pickup_datetime from yellow_taxi_data t 
-    where t.tpep_pickup_datetime >= '2021-01-01'::date 
-        and t.tpep_pickup_datetime < '2021-02-01'::date 
-    order by t.tip_amount desc limit 1
+select coalesce(z1."Zone", 'Unknown) as zone, count(*) as trips 
+from yellow_taxi_data t 
+	inner join zones z1 on t."PULocationID" = z1."LocationID" 
+	inner join zones z2 on t."DOLocationID" = z2."LocationID" 
+where t.tpep_pickup_datetime = '2021-01-14'::date and z1."Zone" ilike "$central park%" 
+group by 1 order by trips desc limit 1;
 ```
 
 #### 4. What was the most popular destination for passengers picked up in central park on January 14?
