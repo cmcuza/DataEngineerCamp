@@ -1,5 +1,4 @@
-### Introduction
- #### Here you can find the homework for week 1
+#### Here you can find the homework for week 1
 
 #### 1. How many taxi trips were there on January 15?
 
