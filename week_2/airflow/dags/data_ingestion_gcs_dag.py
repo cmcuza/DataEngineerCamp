@@ -61,7 +61,6 @@ default_args = {
 # NOTE: DAG declaration - using a Context Manager (an implicit way)
 with DAG(
     dag_id="data_ingestion_gcs_dag",
-    schedule_interval="@daily",
     default_args=default_args,
     catchup=False,
     max_active_runs=1,
@@ -98,7 +97,7 @@ with DAG(
             "tableReference": {
                 "projectId": PROJECT_ID,
                 "datasetId": BIGQUERY_DATASET,
-                "tableId": "external_table",
+                "tableId": "ny-taxi",
             },
             "externalDataConfiguration": {
                 "sourceFormat": "PARQUET",
